@@ -4,37 +4,29 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>League Roulette</title>
-  <style>
-    body{margin:0;min-height:100vh;display:grid;place-items:center;font-family:Arial,sans-serif;background:#111;color:#eee;padding:24px}
-    .card{width:min(760px,100%);background:#1b1b1b;border:1px solid #333;border-radius:20px;padding:24px;text-align:center}
-    img{width:100%;max-width:520px;border-radius:16px;display:block;margin:18px auto;border:1px solid #333}
-    button{background:#d3a453;color:#111;border:0;border-radius:999px;padding:14px 22px;font-weight:700;cursor:pointer}
-    h1{margin:0 0 10px} p{color:#bbb;line-height:1.5}
-    .name{font-size:2rem;font-weight:700;margin:12px 0 4px}
-    .title{color:#d3a453;margin-bottom:10px}
-  </style>
 </head>
 <body>
-  <div class="card">
-    <h1>League Roulette</h1>
-    <p>Click the button to get a random champion and a short description.</p>
-    <button id="roll">Generate champion</button>
-    <div class="name" id="name">Jhin</div>
-    <div class="title" id="title">The Virtuoso</div>
-    <img id="img" src="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Jhin_0.jpg" alt="Jhin splash art">
-    <p id="desc">A precise marksman who treats combat like art.</p>
-  </div>
+  <h1>League Roulette</h1>
+  <button id="roll">Roll champion</button>
+
+  <h2 id="name">Jhin</h2>
+  <p id="title">The Virtuoso</p>
+  <img id="img" src="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Jhin_0.jpg" alt="Jhin splash art" width="600" />
+  <p id="desc">A precise marksman who treats combat like art.</p>
 
   <script>
     const version = '14.24.1';
     const url = `https://ddragon.leagueoflegends.com/cdn/${version}/data/en_US/champion.json`;
+
     const nameEl = document.getElementById('name');
     const titleEl = document.getElementById('title');
     const img = document.getElementById('img');
     const desc = document.getElementById('desc');
     let champs = [];
 
-    fetch(url).then(r => r.json()).then(d => { champs = Object.values(d.data); });
+    fetch(url)
+      .then(r => r.json())
+      .then(d => { champs = Object.values(d.data); });
 
     document.getElementById('roll').onclick = () => {
       if (!champs.length) return;
